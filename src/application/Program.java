@@ -4,41 +4,39 @@ import java.util.Locale;
 import java.util.Scanner;
 import entities.Product;
 
+
+/*
+ * Na mesma "class" não se deve chamar um método não estático da class dentro dos métodos estático da class.
+ * */
 public class Program {
+	
+	public static final double PI = 3.14159;
 	
 	public static void  main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		Product product = new Product();
+		System.out.println("Enter radius: ");		
+		System.out.print("Radiu: ");
+		double radius = sc.nextInt();
 		
-		System.out.println("Enter product data: ");		
-		System.out.print("Name: ");
-		product.name = sc.nextLine();
-		System.out.print("Price: ");
-		product.price = sc.nextDouble();
-		System.out.print("Quantity: ");
-		product.quantity = sc.nextInt();
+		double c = circunference(radius);
+		double v = volume(radius);
+		System.out.printf("Circunference: %.2f%n", c);
+		System.out.printf("Volume: %.2f%n", v);
+		System.out.printf("PI value: %.2f%n", PI);
 		
-		System.out.println("Product data: "+product);		
-		
-		System.out.println();
-		System.out.println("Enter the number of products to be added in stock: ");
-		System.out.print("Quantity: ");
-		int quantity = sc.nextInt();
-		product.AddProducts(quantity);
-		
-		System.out.println("Updat data: "+product);	
-		
-		System.out.println();
-		System.out.println("Enter the number of products to be removed from stock:: ");
-		System.out.print("Quantity: ");
-		quantity = sc.nextInt();
-		product.RemoveProducts(quantity);
-		
-		System.out.println("Updat data: "+product);
 		sc.close();
 	}
-
+	
+	public static double circunference(double radius)
+	{
+		return 2.0 * PI * radius;
+	}
+	
+	public static double volume(double radius)
+	{
+		return 4.0 * PI * radius* radius* radius / 3.0;
+	}
 }
