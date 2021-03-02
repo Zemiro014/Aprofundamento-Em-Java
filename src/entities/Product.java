@@ -13,7 +13,7 @@ public class Product {
 	{
 		setName(name);
 		setPrice(price);
-		setQuantity(quantity);
+		this.quantity = quantity;
 	}
 	
 	public Product(String name, double price)
@@ -30,11 +30,6 @@ public class Product {
 	public void setPrice(double price) 
 	{
 		this.price = price;
-	}
-	
-	public void setQuantity(int quantity) 
-	{
-		this.quantity = quantity;
 	}
 	
 	public String getName() 
