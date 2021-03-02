@@ -2,12 +2,8 @@ package application;
 
 import java.util.Locale;
 import java.util.Scanner;
-import util.Calculate;
+import entities.Product;
 
-
-/*
- * Na mesma "class" não se deve chamar um método não estático da class dentro dos métodos estático da class.
- * */
 public class Program {
 	
 	public static void  main(String[] args) {
@@ -15,16 +11,35 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter radius: ");
-		System.out.print("Radiu: ");
-		double radius = sc.nextDouble();
+		Product product;
 		
-		double c = Calculate.circunference(radius);
-		double v = Calculate.volume(radius);
-		System.out.printf("Circunference: %.2f%n", c);
-		System.out.printf("Volume: %.2f%n", v);
-		System.out.printf("PI value: %.2f%n", Calculate.PI);
+		System.out.println("Enter product data: ");		
+		System.out.print("Name: ");
+		String name = sc.nextLine();
+		System.out.print("Price: ");
+		double price = sc.nextDouble();
+		System.out.print("Quantity: ");
+		int quantity = sc.nextInt();
+		product = new Product(name, price, quantity);
 		
+		System.out.println("Product data: "+product);		
+		
+		System.out.println();
+		System.out.println("Enter the number of products to be added in stock: ");
+		System.out.print("Quantity: ");
+		quantity = sc.nextInt();
+		product.AddProducts(quantity);
+		
+		System.out.println("Updat data: "+product);	
+		
+		System.out.println();
+		System.out.println("Enter the number of products to be removed from stock:: ");
+		System.out.print("Quantity: ");
+		quantity = sc.nextInt();
+		product.RemoveProducts(quantity);
+		
+		System.out.println("Updat data: "+product);
 		sc.close();
 	}
+
 }
