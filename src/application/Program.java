@@ -10,27 +10,21 @@ import util.Calculate;
  * */
 public class Program {
 	
-	
-	
 	public static void  main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		Calculate calc = new Calculate();
-		
-		System.out.println("Enter radius: ");		
+		System.out.println("Enter radius: ");
 		System.out.print("Radiu: ");
 		double radius = sc.nextDouble();
 		
-		double c = calc.circunference(radius);
-		double v = calc.volume(radius);
+		double c = Calculate.circunference(radius);
+		double v = Calculate.volume(radius);
 		System.out.printf("Circunference: %.2f%n", c);
 		System.out.printf("Volume: %.2f%n", v);
-		System.out.printf("PI value: %.2f%n", calc.PI);
+		System.out.printf("PI value: %.2f%n", Calculate.PI);
 		
 		sc.close();
 	}
-	
-	
 }
