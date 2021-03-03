@@ -4,16 +4,8 @@ public class Product {
 	
 	private String name;
 	private double price;
-	private int quantity;
 	
 	public Product(){
-	}
-	
-	public Product(String name, double price, int quantity)
-	{
-		setName(name);
-		setPrice(price);
-		this.quantity = quantity;
 	}
 	
 	public Product(String name, double price)
@@ -40,36 +32,5 @@ public class Product {
 	public double getPrice() 
 	{
 		return price;
-	}
-	
-	public int getQuantity() 
-	{
-		return quantity;
-	}
-	
-	public double TotalValueInStock() 
-	{
-		return price * quantity;
-	}
-	
-	public void AddProducts(int quantity) 
-	{
-		this.quantity += quantity;
-	}
-	
-	public void RemoveProducts(int quantity) 
-	{
-		this.quantity -= quantity;
-	}
-	
-	public String toString() 
-	{
-		return "Nome: "
-				+name 
-				+", preço: "
-				+String.format("%.2f", price)
-				+ ",  quantidade: "+quantity
-				+", total: "
-				+String.format("%.2f", TotalValueInStock());
 	}
 }
