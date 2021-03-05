@@ -1,38 +1,39 @@
 package application;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class Program {
 	
 	public static void  main(String[] args) throws ParseException {
 		
-		// Programa que escreve caracteres em um arquivo usando "Streams" (BufferedReader, FileReader) em um bloco "try-with-resources"	
+		// Programa que lista todos os directórios
 		
-		String[] lines = new String[] {"Good morning", "Good afternoon", "Good night", "Good evning"};
+		Scanner sc = new Scanner(System.in);
 		
-		String path = "c:\\temp\\out.txt";
+		System.out.println("Enter folder path: ");
+		String strPath = sc.nextLine();
 		
-		/*
-		 * Se vc não especificar o "true" em "FileWriter", cada vez que tu rodar o programa ele irá destruir o arquivo anterior e recria-lo. 
-		 * 
-		 * Com "true" especificado ele irá adicionar novos conteudos ao arquivo exixtente sempre que vc rodar o programa
-		 * */
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) 
+		File path = new File(strPath);
+		File[] folders = path.listFiles(File::isDirectory); // Criando um vector de "path" contidas no directoria especificado no "strPath"
+		System.out.println("FOLDERS");
+		for(File folder : folders) 
 		{
-			
-			for (String line : lines) 
-			{
-				bw.write(line);
-				bw.newLine();
-			}
+			System.out.println(folder);
 		}
-		catch(IOException e) 
+		
+		File[] files = path.listFiles(File::isFile); // Criando um vector de "files" contidas no directoria especificado no "strPath"
+		System.out.println("FILES");
+		for(File file : files) 
 		{
-			e.printStackTrace();			
+			System.out.println(file);
 		}
+		
+		// Criando uma subpast dentro do directoria especificado no "strPath"
+		boolean success = new File(strPath + "\\subdir").mkdir();
+		System.out.println("Directory  created successfully: "+ success);
+		sc.close();
 	}
 
 }
