@@ -1,32 +1,49 @@
 package application;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Scanner;
 
 public class Program {
 	
 	public static void  main(String[] args) throws ParseException {
 		
-		// Programa que lê as informações de um arquivo
+		// Programa que lê as informações de um arquivo usando "Streams" (BufferedReader, FileReader)		
+		String path = "c:\\temp\\in.txt";		
 		
-		File file = new File("c:\\temp\\in.txt");		
-		Scanner sc = null;
+		FileReader fr = null;
+		BufferedReader br = null;
 		
 		try {
-			sc = new Scanner(file);
+			fr = new FileReader(path);
+			br = new BufferedReader(fr);
 			
-			while(sc.hasNextLine()) {
-				System.out.println(sc.nextLine());
+			String line = br.readLine();
+			
+			while (line != null) {
+				System.out.println(line);
+				line = br.readLine();
 			}
 		}
-		catch(IOException e) {
-			System.out.println("Error: "+e.getMessage());
+		catch(IOException e) 
+		{
+			System.out.println("Error: "+e.getMessage());			
 		}
 		finally {
-			if(sc != null) {
-				sc.close();
+			try {
+				if(br != null) 
+				{
+					br.close();
+				}
+				if(fr != null) 
+				{
+					br.close();
+				}
+			}
+			catch(IOException e) 
+			{
+				e.printStackTrace();
 			}
 		}
 	}
