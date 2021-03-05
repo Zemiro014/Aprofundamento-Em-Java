@@ -1,6 +1,8 @@
 package entities;
 
-public class Account {
+
+// Class "abstract" são "classes" que não permitem serem instanciadas, mas permite instanciar as "subclasses" desta mesma "class"
+public abstract class Account {
 
 	private Integer number;
 	private String holder;
