@@ -2,12 +2,14 @@ package application;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Employee;
-import entities.OutsourcedEmployee;
+import entities.ImportedProduct;
+import entities.Product;
+import entities.UsedProduct;
 
 public class Program {
 	
@@ -16,38 +18,43 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		List<Employee> list = new ArrayList<>();
+		List<Product> list = new ArrayList<>();
 		
-		System.out.print("Enter the number of employees: ");
+		System.out.print("Enter the number of products: ");
 		int n = sc.nextInt();
 		
 		for(int i = 1; i <= n; i++)
 		{
 			System.out.println("Employe # " +i+" data: ");
-			System.out.print("Outsourced (y/n)? ");
+			System.out.print("Common, Used or imported (c/u/i)? ");
 			char ch = sc.next().charAt(0);
 			System.out.print("Name: ");
 			System.out.println();
 			String name = sc.next();
-			System.out.print("Hours: ");
-			int hours = sc.nextInt();
-			System.out.print("Value per hours: ");
-			double valuePerHour = sc.nextDouble();
-			
-			if(ch == 'y') {
-				System.out.print("Additional charge: ");
-				double additionalCharge = sc.nextDouble(); 
-				list.add(new OutsourcedEmployee(name, hours, valuePerHour, additionalCharge));
+			System.out.print("Price: ");
+			double price = sc.nextDouble();			
+			if(ch == 'i') 
+			{
+				System.out.print("Customs fee: ");
+				double customsFee = sc.nextDouble();
+				list.add(new ImportedProduct(name, price, customsFee));
 			}
-			else {
-				list.add(new Employee(name, hours, valuePerHour));
-			}			
+			else if (ch == 'u')
+			{
+				System.out.print("Manufacture date (DD/MM/yyyy): ");
+				String manufactureDate = sc.next();
+				list.add(new UsedProduct(name, price, new Date(manufactureDate)));
+			}
+			else 
+			{
+				list.add(new Product(name, price));
+			}
 		}
 		
 		System.out.println();
-		System.out.println("PAYMENTS: ");
-		for(Employee emp : list) {
-			System.out.println("nome: "+emp.getName() + " - $ "+String.format("%.2f", emp.payment()));
+		System.out.println("PRICE TAGS: ");
+		for(Product p : list) {
+			System.out.println(p.priceTag());
 		}
 		sc.close();
 	}

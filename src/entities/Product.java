@@ -33,4 +33,9 @@ public class Product {
 	{
 		return price;
 	}
+	
+	public String priceTag() 
+	{
+		return getName() + " $ "+getPrice();
+	}
 }
