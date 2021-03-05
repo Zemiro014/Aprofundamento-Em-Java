@@ -8,31 +8,17 @@ public class Program {
 	
 	public static void  main(String[] args) throws ParseException {
 		
-		// Programa que lista todos os directórios
+		// Programa que pega as informações de um File
 		
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);		
 		
-		System.out.println("Enter folder path: ");
+		System.out.println("Enter a file path: ");
 		String strPath = sc.nextLine();
 		
 		File path = new File(strPath);
-		File[] folders = path.listFiles(File::isDirectory); // Criando um vector de "path" contidas no directoria especificado no "strPath"
-		System.out.println("FOLDERS");
-		for(File folder : folders) 
-		{
-			System.out.println(folder);
-		}
-		
-		File[] files = path.listFiles(File::isFile); // Criando um vector de "files" contidas no directoria especificado no "strPath"
-		System.out.println("FILES");
-		for(File file : files) 
-		{
-			System.out.println(file);
-		}
-		
-		// Criando uma subpast dentro do directoria especificado no "strPath"
-		boolean success = new File(strPath + "\\subdir").mkdir();
-		System.out.println("Directory  created successfully: "+ success);
+		System.out.println("File name: "+path.getName()); // pega o nome do arquivo e despresa o caminho.
+		System.out.println("File parent: "+path.getParent()); // pega o caminho do arquivo e despresa o nome.
+		System.out.println("File path: "+path.getPath()); // pega o caminho todo do arquivo.
 		sc.close();
 	}
 
