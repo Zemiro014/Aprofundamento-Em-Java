@@ -1,15 +1,12 @@
 package application;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Client;
-import entities.Order;
-import entities.OrderItem;
-import entities.Product;
-import entities.enums.OrdeStatus;
+import entities.Account;
+import entities.BusinessAccount;
+import entities.SavingsAccount;
 
 public class Program {
 	
@@ -18,42 +15,32 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		Product p;
-		OrderItem item;
-		Order ord;
+		Account acc = new  Account(1001, "Alex", 0.0);
+		BusinessAccount bacc = new BusinessAccount(1002, "Maria", 0.0, 500.0);
 		
-		System.out.println("Enter cliente data: ");
-		System.out.print("Name: ");
-		String cli_name = sc.nextLine();
-		System.out.print("Email: ");
-		String cli_email = sc.nextLine();
-		System.out.print("Birth date (DD/MM/yyyy): ");
-		String cli_birthDate = sc.nextLine();
-		Client cli = new Client(cli_name, cli_email, new Date(cli_birthDate));
+		// UPCASTING: Instanciar uma "SubClass" a uma variável do tipo "SuperClass"
+		Account acc1 = bacc;
+		Account acc2 = new BusinessAccount(1003, "Bob", 0.0, 200.0);
+		Account acc3 = new SavingsAccount(1004, "Anna", 1000.0, 0.01);
 		
-		System.out.println();
-		System.out.println("Enter order data: ");		
-		System.out.print("Status: ");
-		String status =  sc.next();		
-		ord = new Order(1080, cli, OrdeStatus.valueOf(status), new Date("20/04/2018 11:25:09"));
-		System.out.print("How many items to this order?: ");
-		int n = sc.nextInt();
-		System.out.println();
+		// DOWNCASTING: é o inverso do "UPCASTING": Instanciar uma "Superclass" a uma variável do tipo "SubClass"; Para funcionar o DOWNCASTING, precisa-se esforçar o compilador		
+		BusinessAccount acc4 = (BusinessAccount)acc2;
+		acc4.loan(100.0);
 		
-		for(int i = 1; i <= n; i++)
-		{
-			System.out.println("Enter # "+i+" item data:");
-			System.out.print("Product Name: ");
-			String prod_name = sc.next();
-			System.out.print("Product price: ");
-			double prod_price = sc.nextDouble();
-			System.out.print("Product quantity: ");
-			int quantity = sc.nextInt();
-			p = new Product(prod_name, prod_price);
-			item = new OrderItem(quantity, p);		
-			ord.addItem(item);
-		}		
-		System.out.print(ord);
+		// acc3 é um "SavingsAccount" e não um "BusinessAccount" logo vai dar um erro na hora de execução: Como ss prevenir destes erros? Verificar se acc3 é um "BusinessAccount" usando "instanceOf"		
+		// BusinessAccount acc5 = (BusinessAccount)acc3;
+		
+		if(acc3 instanceof BusinessAccount) {
+			BusinessAccount acc5 = (BusinessAccount)acc3;
+			acc5.loan(200.0);
+			System.out.println("Loan !");
+		}
+		
+		if(acc3 instanceof SavingsAccount) {
+			SavingsAccount acc5 = (SavingsAccount)acc3;			
+			acc5.updateBalance();
+			System.out.println("Update !");
+		}
 		
 		sc.close();
 	}

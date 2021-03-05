@@ -11,7 +11,7 @@ public class Account {
 	public Account(Integer number, String holder, Double balance) {
 		setNumber(number);
 		setHolder(holder);
-		deposit(balance);
+		this.balance = balance;
 	}
 
 	public Integer getNumber() {
