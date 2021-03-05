@@ -1,6 +1,7 @@
 package entities;
 
-public class SavingsAccount extends Account {
+// Uma class "final" significa dizer que essa class não poderá ser herdada de jeito nenhum
+public final class SavingsAccount extends Account {
 
 	private Double interesRate;
 	
@@ -26,8 +27,10 @@ public class SavingsAccount extends Account {
 		balance += balance * interesRate;
 	}
 	
+	
+	// Um método "final" significa que este método não deve ser sobreposto (@Override)
 	@Override
-	public void withdraw(double amount) {
+	public final void withdraw(double amount) {
 		this.balance -= amount;
 	}
 }
