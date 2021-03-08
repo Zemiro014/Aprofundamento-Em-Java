@@ -1,7 +1,7 @@
 package application;
 
-import java.io.File;
 import java.text.ParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
@@ -12,13 +12,21 @@ public class Program {
 		
 		Scanner sc = new Scanner(System.in);		
 		
-		System.out.println("Enter a file path: ");
-		String strPath = sc.nextLine();
+		try 
+		{
+			String[] vect = sc.nextLine().split(" ");
+			int position = sc.nextInt();
+			System.out.println(vect[position]);
+		}
+		catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("Invalid position !");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Input Error");
+		}
 		
-		File path = new File(strPath);
-		System.out.println("File name: "+path.getName()); // pega o nome do arquivo e despresa o caminho.
-		System.out.println("File parent: "+path.getParent()); // pega o caminho do arquivo e despresa o nome.
-		System.out.println("File path: "+path.getPath()); // pega o caminho todo do arquivo.
+		System.out.println("End of program");
+		
 		sc.close();
 	}
 
