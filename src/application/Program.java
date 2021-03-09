@@ -1,44 +1,36 @@
 package application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
 	
 	public static void  main(String[] args) throws ParseException 
 	{		
-		// Por padrão em java, quando O "EXCEPTION" não é tratada o programa termina de executar no ponto em que originou A "EXCEÇÃO".
-		 method1();		
-		System.out.println("End of program");	
-	}
-	
-	public static void method1() 
-	{
-		System.out.println("***Method1 start***");
-		method2();
-		System.out.println("***Method1 end***");
-	}
-	public static void method2()
-	{
-		System.out.println("***Method2 start***");
-		Scanner sc = new Scanner(System.in);
-		try
-		{
-			String[] vect = sc.nextLine().split(" ");
-			int position = sc.nextInt();
-			System.out.println(vect[position]);
-		}
-		catch(ArrayIndexOutOfBoundsException e) {
-			System.out.println("Invalid position !");
-			e.printStackTrace(); // serve para rastrear o percurso da excessão em questão
-			sc.nextLine();
-		}
-		catch(InputMismatchException e) {
-			System.out.println("Input Error");
-		}
 		
-		sc.close();
-		System.out.println("***Method2 end***");
+		//Scanner sc = new Scanner(System.in);
+			
+		File file = new File("c:\\temp\\in.txt");
+		Scanner sc = null;
+		
+		try {
+			sc = new Scanner(file);
+			while(sc.hasNextLine()) {
+				System.out.println(sc.nextLine());
+			}
+		}
+		catch(FileNotFoundException e) 
+		{
+			System.out.println("Error opening file: "+e.getMessage());
+		}
+		finally // Finally é usado para declarar um bloco de código que será executado independemente de ocorrer ou não uma "Exception": Exemplo: fechar uma "conecção com BD", fechar um "File"
+		{
+			if(sc != null) {
+				sc.close();
+			}
+			System.out.println("Finally block executed");
+		}
 	}
 }
